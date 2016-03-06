@@ -18,3 +18,5 @@
 
 
 config/idenpo_config.yml
+.ruby-version
+.ruby-gemset

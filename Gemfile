@@ -9,12 +9,14 @@ gem 'coffee-rails', '~> 4.1.0'
 gem 'jquery-rails'
 gem 'jbuilder', '~> 2.0'
 gem 'slim-rails'
-gem 'devise-bootstrap-views'
+gem 'twitter-bootstrap-rails'
 
 gem 'sdoc', '~> 0.4.0', group: :doc
 
 gem 'devise'
 gem 'omniauth-twitter'
+# gem 'less-rails'
+gem 'devise-bootstrap-views'
 gem 'bcrypt', '~> 3.1.7'
 
 group :development, :test do
@@ -23,9 +25,9 @@ group :development, :test do
 end
 
 group :development do
-  gem 'web-console', '~> 2.0'
-  gem 'spring'
-  gem 'capistrano-rails'
+  # gem 'web-console', '~> 2.0'
+  # gem 'spring'
+  # gem 'capistrano-rails'
   gem 'pry'
 end
 
