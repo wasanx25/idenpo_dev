@@ -14,6 +14,7 @@ gem 'devise-bootstrap-views'
 gem 'sdoc', '~> 0.4.0', group: :doc
 
 gem 'devise'
+gem 'omniauth-twitter'
 gem 'bcrypt', '~> 3.1.7'
 
 group :development, :test do

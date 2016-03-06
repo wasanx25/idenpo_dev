@@ -6,6 +6,10 @@ require 'rails/all'
 # you've limited to :test, :development, or :production.
 Bundler.require(*Rails.groups)
 
+def iden_conf
+  YAML.load(File.open('config/idenpo_config.yml'))
+end
+
 module Idenpo
   class Application < Rails::Application
     # Settings in config/environments/* take precedence over those specified here.
