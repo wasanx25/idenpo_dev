@@ -17,6 +17,9 @@ gem 'omniauth-twitter'
 # gem 'less-rails'
 gem 'devise-bootstrap-views'
 gem 'bcrypt', '~> 3.1.7'
+gem 'metainspector', '~> 5.1', '>= 5.1.1'
+gem 'mechanize', '~> 2.7', '>= 2.7.4'
+gem 'rubocop', '~> 0.39.0'
 
 group :development, :test do
   # gem 'byebug'

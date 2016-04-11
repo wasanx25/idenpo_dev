@@ -1,0 +1,8 @@
+h2 投稿してみてくださいよ
+= form_tag('/posts') do
+  .form-group
+  = text_field_tag :url, '', :placeholder => 'URLを入力してください', :class => 'form-control'
+  .form-group
+  = text_area_tag :body, '', :placeholder => 'コメントを入力してください', :class => 'form-control'
+  .form-group
+  = submit_tag '投稿する', :class => 'btn btn-primary'
