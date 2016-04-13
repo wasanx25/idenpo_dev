@@ -10,10 +10,21 @@ html
     = javascript_include_tag 'application', 'data-turbolinks-track' => true
     = csrf_meta_tags
   body
-    #header
+    .navbar.navbar-default
       .container
-
-    .container
-      = yield
+        .navbar-header.page-scroll
+          a.navbar-brand Idenpo
+        .collapse.navbar-collapse
+          ul.nav.navbar-nav.navbar-right
+            li.page-scroll
+              - if user_signed_in?
+                a = current_user.username
+              - else
+                = link_to 'sign in', new_user_session_path
+            li.page-scroll
+              = link_to 'sign out', destroy_user_session_path, :method => :delete
+    #main
+      .container
+        = yield
 
     #footer
