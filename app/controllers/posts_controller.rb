@@ -19,19 +19,26 @@ class PostsController < ApplicationController
   end
 
   def edit
-    puts 'edit'
+    @post = Post.find(params[:id])
   end
 
   def show
-    puts 'show'
+    @post = Post.find(params[:id])
   end
 
   def update
-    puts 'update'
+    @post = Post.find(params[:id])
+    @post.update(:body => params[:body])
   end
 
   def destroy
-    puts 'destroy'
+    post = Post.find(params[:id])
+    post.delete
+    if request.referer
+      redirect_to :back
+    else
+      redirect_to root_path
+    end
   end
 
   private
