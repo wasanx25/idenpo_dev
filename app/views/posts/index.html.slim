@@ -1,5 +1,11 @@
-- @posts.each do |post|
-  .col-md-4
-    = p post.title
-    = p post.site_name
-    img src = post.image_name
+.row
+  - @posts.each do |post|
+    .span4
+      .card
+        h3.card-heading.simple = post.title
+        .card-body
+          p = post.body
+        .card-actions
+          button.btn.btn-block View Details
+        img.img-thumbnail.image-responsive src = post.image_name
+

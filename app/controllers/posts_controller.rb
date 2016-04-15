@@ -66,7 +66,7 @@ class PostsController < ApplicationController
 
   def scraping_and_save(url, body)
     page = MetaInspector.new(url)
-    @new_post = Post.new(url: url, body: body)
+    @new_post = Post.new(url: url, body: body, user_id: @user_id)
     add_ogps(page.meta_tags['property'])
     begin
       @new_post.save

@@ -14,3 +14,12 @@
  *= require_self
  *= require devise_bootstrap_views
  */
+
+body {
+  background-color: #f5f5f5;
+}
+
+.card .card-heading.simple {
+  font-size: 18px;
+  line-height: 1.5;
+}
