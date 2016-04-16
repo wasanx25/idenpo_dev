@@ -1,11 +1,10 @@
 .row
   - @posts.each do |post|
-    .span4
-      .card
-        h3.card-heading.simple = post.title
-        .card-body
-          p = post.body
-        .card-actions
-          button.btn.btn-block View Details
-        img.img-thumbnail.image-responsive src = post.image_name
+    .card
+      h3.card-heading.simple = post.title
+      .card-body
+        p = post.body
+      .card-actions
+        button.btn.btn-link View Details
+      img.img-thumbnail.image-responsive src = post.image_name
 
