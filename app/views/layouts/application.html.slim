@@ -3,12 +3,13 @@ html
   head
     title
       | Idenpo
-    link[href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet"]
-    link[href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css" rel="stylesheet"]
-    script[src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"]
-    link[href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css" rel="stylesheet"]
-    = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true
-    = javascript_include_tag 'application', 'data-turbolinks-track' => true
+    script[src='https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js']
+    link[href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css' rel='stylesheet']
+    link[href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css' rel='stylesheet']
+    script[src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js']
+    link[href='https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css' rel='stylesheet']
+    = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => false
+    = javascript_include_tag 'application', 'data-turbolinks-track' => false
     = csrf_meta_tags
   body
     .navbar.navbar-default
@@ -17,13 +18,19 @@ html
           a.navbar-brand Idenpo
         .collapse.navbar-collapse
           ul.nav.navbar-nav.navbar-right
+            li.page-scroll.dropdown
+              a.dropdown-toggle href='#' data-toggle='dropdown' role='button' aria-haspopup='true' aria-expanded='false' Dropdown
+              ul#dropdown-post.dropdown-menu
+                li
+                  = render 'posts/form'
             li.page-scroll
               - if user_signed_in?
                 a = current_user.username
               - else
                 = link_to 'sign in', new_user_session_path
             li.page-scroll
-              = link_to 'sign out', destroy_user_session_path, :method => :delete
+              - if user_signed_in?
+                = link_to 'sign out', destroy_user_session_path, :method => :delete
     #main
       .container
         = yield
