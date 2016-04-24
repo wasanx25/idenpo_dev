@@ -20,3 +20,9 @@
 config/idenpo_config.yml
 .ruby-version
 .ruby-gemset
+client/
+node_modules/
+npm-debug.log
+package.json
+tsconfig.json
+webpack.config.js
