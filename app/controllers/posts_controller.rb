@@ -28,17 +28,14 @@ class PostsController < ApplicationController
 
   def update
     @post = Post.find(params[:id])
-    @post.update(:body => params[:body])
+    @post.update(:body => params[:post][:body])
+    redirect_to '/posts'
   end
 
   def destroy
-    post = Post.find(params[:id])
-    post.delete
-    if request.referer
-      redirect_to :back
-    else
-      redirect_to root_path
-    end
+    @post = Post.find(params[:id])
+    @post.delete
+    render :json => {:post => @post}
   end
 
   private

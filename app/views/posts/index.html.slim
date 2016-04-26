@@ -1,10 +1,15 @@
+p#update_notice.btn-success 更新しました
 .row
   - @posts.each do |post|
-    .card
+    div.card id='post_#{post.id}' 
       h3.card-heading.simple = post.title
       .card-body
-        p = post.body
+        = form_tag post_path(post), method: :put, id: "update_#{post.id}", class: 'update_form', data: { remote: :true }
+          = text_area :post, :body, { rows: 3, class: 'form-control', value: post.body }
+          = submit_tag 'Change', { class: 'btn btn-warning update_button' }
       .card-actions
         button.btn.btn-link View Details
       img.img-thumbnail.image-responsive src = post.image_name
+      = link_to post_path(post), data: { confirm: 'Are you sure?' }, method: :delete, remote: :true do
+        i.fa.fa-trash-o aria-hidden='true'
 

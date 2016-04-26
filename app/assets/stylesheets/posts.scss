@@ -10,6 +10,18 @@
 }
 
 /* post list */
+#update_notice {
+  display: none;
+  background-color: #5cb85c;
+  font-size: 21px;
+  font-weight: bold;
+  margin: 0 auto 20px;
+  text-align: center;
+  padding: 15px 0;
+  border-radius: 6px;
+  width: 650px;
+}
+
 .card {
   width: 30%;
   display: inline-block;
@@ -18,13 +30,14 @@
   border: 1px solid #ededf0;
   border-bottom: 1px solid #dcdce0;
   border-radius: 8px;
-  height: 350px;
+  height: 450px;
 
   .card-heading.simple {
     font-size: 18px;
     line-height: 1.5;
     padding: 0 5px;
     margin: 10px 0;
+    height: 55px;
   }
 
   .card-body {
