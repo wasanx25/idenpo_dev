@@ -50,9 +50,13 @@
   .card-body {
     padding: 0 5px;
   }
-
-  .card-actions {
-
+  
+  .card-image {
+    max-height: 190px;
+    overflow: hidden;
+    img {
+      width: 100%;
+    }
   }
 
 }

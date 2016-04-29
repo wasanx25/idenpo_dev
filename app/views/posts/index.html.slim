@@ -10,7 +10,8 @@ p#update_notice.btn-success 更新しました
       .card-actions
         button.btn.btn-link 
           = link_to 'View Details', post_path(post)
-      img.img-thumbnail.image-responsive src = post.image_name
+      .card-image.img-thumbnail.image-responsive
+        img src = post.image_name
       = link_to post_path(post), data: { confirm: 'Are you sure?' }, method: :delete, remote: :true do
         i.fa.fa-trash-o aria-hidden='true'
 
