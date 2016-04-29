@@ -1,7 +1,7 @@
 # Posts
 class PostsController < ApplicationController
   def index
-    @posts = Post.all.sort {|a, b| b <=> a }
+    @posts = Post.all.sort { |a, b| b <=> a }
   end
 
   def create
@@ -10,7 +10,7 @@ class PostsController < ApplicationController
     begin
       scraping_and_save(params[:url], params[:body])
     rescue
-      @error = '保存することができませんでした'
+      raise
     end
     redirect_to '/posts'
   end
@@ -24,14 +24,14 @@ class PostsController < ApplicationController
 
   def update
     @post = Post.find(params[:id])
-    @post.update(:body => params[:post][:body])
+    @post.update(body: params[:post][:body])
     redirect_to '/posts'
   end
 
   def destroy
     @post = Post.find(params[:id])
     @post.delete
-    render :json => {:post => @post}
+    render json: { post: @post }
   end
 
   private
@@ -61,6 +61,7 @@ class PostsController < ApplicationController
     page = MetaInspector.new(url, faraday_options: { ssl: { verify: false } })
     @new_post = Post.new(url: url, body: body, user_id: @user_id)
     add_ogps(page.meta_tags['property'])
+    @new_post[:image_name] = URI.join(url, @new_post[:image_name])
     begin
       @new_post.save
       save_keywords(page.meta_tags['name']['keywords'])
