@@ -1,29 +1,25 @@
 # Posts
 class PostsController < ApplicationController
   def index
-    @posts = Post.all
+    @posts = Post.all.sort {|a, b| b <=> a }
   end
 
   def create
     @user_id = current_user.id unless current_user.id.blank?
 
-    if scraping_and_save(params[:url], params[:body])
-      redirect_to '/posts'
-    else
-      redirect_to '/posts/new'
+    begin
+      scraping_and_save(params[:url], params[:body])
+    rescue
+      @error = '保存することができませんでした'
     end
-  end
-
-  def new
-    puts 'new'
-  end
-
-  def edit
-    @post = Post.find(params[:id])
+    redirect_to '/posts'
   end
 
   def show
-    @post = Post.find(params[:id])
+    post = Post.find(params[:id])
+    agent = Mechanize.new
+    page = agent.get(post.url)
+    @post = page.search('body')
   end
 
   def update
@@ -62,7 +58,7 @@ class PostsController < ApplicationController
   end
 
   def scraping_and_save(url, body)
-    page = MetaInspector.new(url)
+    page = MetaInspector.new(url, faraday_options: { ssl: { verify: false } })
     @new_post = Post.new(url: url, body: body, user_id: @user_id)
     add_ogps(page.meta_tags['property'])
     begin
