@@ -12,4 +12,7 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require generated/common
+//= require generated/vendor
+//= require generated/bundle
 //= require_tree .

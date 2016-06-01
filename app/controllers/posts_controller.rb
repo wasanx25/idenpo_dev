@@ -1,21 +1,29 @@
 # Posts
 class PostsController < ApplicationController
-  before_action :authenticate_user!
+  before_action :authenticate_user!, :set_user
   protect_from_forgery with: :exception
+  include OperateMeta
+  
+  def set_user
+    @user_id = current_user.id unless current_user.id.blank?
+  end
+  
+  def get_post
+    posts = Post.where(user_id: @user_id).sort { |a, b| b <=> a }
+    render :json => posts
+  end
 
   def index
-    @posts = Post.all.sort { |a, b| b <=> a }
+    @posts = Post.where(user_id: @user_id).sort { |a, b| b <=> a }
   end
 
   def create
-    @user_id = current_user.id unless current_user.id.blank?
-
     begin
       scraping_and_save(params[:url], params[:body])
     rescue
       raise
     end
-    redirect_to '/posts'
+    redirect_to '/'
   end
 
   def show
@@ -35,52 +43,5 @@ class PostsController < ApplicationController
     @post = Post.find(params[:id])
     @post.delete
     render json: { post: @post }
-  end
-
-  private
-
-  def add_ogps(ogps)
-    ogps.each do |key, value|
-      v = value.to_s
-      v = v.slice!(2...-2) if v =~ /\A\[.+\]\Z/
-      set_ogp(key, v)
-    end
-  end
-
-  def set_ogp(key, value)
-    case key
-    when 'og:title' then
-      @new_post[:title] = value
-    when 'og:description' then
-      @new_post[:description] = value
-    when 'og:site_name' then
-      @new_post[:site_name] = value
-    when 'og:image' then
-      @new_post[:image_name] = value
-    end
-  end
-
-  def scraping_and_save(url, body)
-    page = MetaInspector.new(url, faraday_options: { ssl: { verify: false } })
-    @new_post = Post.new(url: url, body: body, user_id: @user_id)
-    add_ogps(page.meta_tags['property'])
-    @new_post[:image_name] = URI.join(url, @new_post[:image_name])
-    begin
-      @new_post.save
-      save_keywords(page.meta_tags['name']['keywords'])
-    end
-  end
-
-  def save_keywords(keywords)
-    keywords = keywords.to_s.split(/\s*,\s*/)
-    return false if keywords.blank?
-    keywords.each do |value|
-      if value.start_with?('[')
-        value = value.slice!(2..-1)
-      elsif value =~ /\]\Z/
-        value = value.slice!(0...-2)
-      end
-      Keyword.create(body: value, user_id: @user_id)
-    end
   end
 end

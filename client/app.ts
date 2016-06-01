@@ -2,9 +2,7 @@ import {ViewEncapsulation, Component} from 'angular2/core';
 import {CORE_DIRECTIVES} from 'angular2/common';
 import {ROUTER_DIRECTIVES, Router, RouteConfig, Location} from 'angular2/router';
 import 'rxjs/Rx';
-import {JSONP_PROVIDERS, Jsonp} from 'angular2/http';
- 
-import {AppComponent} from './components/AppComponent';
+import {Http, HTTP_PROVIDERS, Response} from 'angular2/http';
  
 @Component({
   moduleId: module.id,
@@ -17,14 +15,14 @@ import {AppComponent} from './components/AppComponent';
     <p>status: {{ status }}</p>
     <pre>{{ body | json }}</pre>
   `,
-  providers: [JSONP_PROVIDERS],
+  providers: [HTTP_PROVIDERS],
   directives: [
     CORE_DIRECTIVES,
     ROUTER_DIRECTIVES
   ]
 })
 @RouteConfig([
-  { path: '/', name: 'AppComponent', component: AppComponent }
+  // { path: '/', name: 'AppComponent', component: AppComponent }
 ])
 export class App {
  
@@ -33,21 +31,31 @@ export class App {
   public status: number;
   public body: string;
  
-  constructor(private _jsonp: Jsonp, router: Router, location: Location) {
+  constructor(private http: Http, router: Router, location: Location) {
     console.log('app.ts');
     this.router = router;
     this.location = location;
   }
 
   getApi() {
-    this._jsonp.get('http://connpass.com/api/v1/event/?callback=JSONP_CALLBACK&keyword=python')
+    this.http.get('/get_post')
         .subscribe(
           res => {
             this.status = res.status;
-            console.log(res.status);
-            // this.body = res.json().events;
+            this.body = res.json();
           },
           error => alert(error));
   }
+
+  // getApi() {
+  //   this._jsonp.get('/get_post')
+  //       .subscribe(
+  //         res => {
+  //           console.log(res.json())
+  //           // this.status = res.status;
+  //           // this.body = res;
+  //         },
+  //         error => alert(error));
+  // }
 }
 
