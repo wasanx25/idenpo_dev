@@ -1,6 +1,6 @@
 import "reflect-metadata";
 import {bootstrap}    from 'angular2/platform/browser';
-import {App} from './app';
+import {PostCreate} from './components';
 import {provide} from 'angular2/core';
 import {
   ROUTER_PRIMARY_COMPONENT,
@@ -11,7 +11,7 @@ import {
 const ROUTER_PROVIDERS: Array<any> = [
   NG2_ROUTER_PROVIDERS,
   provide(ROUTER_PRIMARY_COMPONENT, {
-    useValue: App
+    useValue: PostCreate
   }),
   provide(APP_BASE_HREF, {
     useValue: '/'
@@ -23,5 +23,5 @@ const APP_PROVIDERS: Array<any> = [
 ];
  
 window.addEventListener("load", (e) => {
-  bootstrap(App, APP_PROVIDERS);
+  bootstrap(PostCreate, APP_PROVIDERS);
 });

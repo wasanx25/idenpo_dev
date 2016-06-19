@@ -3,6 +3,9 @@ import {CORE_DIRECTIVES} from 'angular2/common';
 import {ROUTER_DIRECTIVES, Router, RouteConfig, Location} from 'angular2/router';
 import 'rxjs/Rx';
 import {Http, HTTP_PROVIDERS, Response} from 'angular2/http';
+import {
+  PostFormComponent
+} from './components';
  
 @Component({
   moduleId: module.id,
@@ -22,7 +25,7 @@ import {Http, HTTP_PROVIDERS, Response} from 'angular2/http';
   ]
 })
 @RouteConfig([
-  // { path: '/', name: 'AppComponent', component: AppComponent }
+  // { path: '/', name: 'PostCreateComponent', component: PostCreateComponent }
 ])
 export class App {
  
