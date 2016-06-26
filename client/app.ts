@@ -35,7 +35,6 @@ export class App {
   public body: string;
  
   constructor(private http: Http, router: Router, location: Location) {
-    console.log('app.ts');
     this.router = router;
     this.location = location;
   }

@@ -11,14 +11,11 @@ import {PostFormComponent} from '../../components';
 import {PostService} from '../../services';
 import {Post} from '../../models';
 
-// const templateUrl = require('./post_create.html');
+const templateUrl = require('./post_create.html');
 
 @Component({
   moduleId: module.id,
-  template: `
-    <p>test</p>
-    <router-outlet></router-outlet>
-  `,
+  templateUrl: templateUrl,
   selector: 'post-create',
   directives: [
     CORE_DIRECTIVES,

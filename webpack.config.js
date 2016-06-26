@@ -15,7 +15,7 @@ module.exports = {
   },
   resolve: {
     root: [path.join(__dirname, 'client/assets/scripts')],
-    extensions: ['', '.webpack.js', '.web.js', '.ts', '.tsx', '.js']
+    extensions: ['', '.webpack.js', '.web.js', '.ts', '.tsx', '.js', '.html']
   },
   module: {
     loaders: [
