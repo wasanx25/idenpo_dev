@@ -38,5 +38,6 @@ module Idenpo
         request_specs: false
       g.fixture_replacement :factory_girl, dir: "spec/factories"
     end
+    config.assets.paths << Rails.root.join("app", "assets", "html")
   end
 end

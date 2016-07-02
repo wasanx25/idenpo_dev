@@ -1,4 +1,4 @@
-import {Component} from 'angular2/core';
+import {Component, Injectable} from 'angular2/core';
 import {
   FORM_DIRECTIVES,
   CORE_DIRECTIVES,
@@ -11,23 +11,39 @@ import {PostFormComponent} from '../../components';
 import {PostService} from '../../services';
 import {Post} from '../../models';
 
-const templateUrl = require('./post_create.html');
+// const templateUrl = require('./post_create.html');
 
 @Component({
   moduleId: module.id,
-  templateUrl: templateUrl,
+  template: `
+    <div class="container">
+      <h2> Product Detail </h2>
+      <form (ngSubmit)="onSubmit()" class="form-horizontal" [ngFormModel]="form">
+        <div class="col-xs-12 text-right">
+          <span [hidden]="form.valid">
+            <label class="label label-danger mr-5">Invalid</label>
+          </span>
+          <button type="submit" class="btn btn-default" [disabled]="!form.valid">
+            Create
+          </button>
+        </div>
+    
+        <post-form [post]="post" [form]="form"></post-form>
+    
+      </form>
+    </div>`,
   selector: 'post-create',
   directives: [
     CORE_DIRECTIVES,
     FORM_DIRECTIVES,
-    PostCreate
+    PostCreateComponent
   ],
   providers: [
     PostService
   ]
 })
 
-export class PostCreate {
+export class PostCreateComponent {
   form: ControlGroup;
   post: Post = new Post();
 
@@ -39,7 +55,6 @@ export class PostCreate {
       'url': ['', Validators.required],
       'body': ['', Validators.required]
     });
-    console.log('okdesu');
   } 
 
   onSubmit(): void {
