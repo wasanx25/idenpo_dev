@@ -1,3 +1,3 @@
-class Keyword < ActiveRecord::Base
+class Keyword < ApplicationRecord
   belongs_to :user
 end
