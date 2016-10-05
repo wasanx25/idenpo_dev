@@ -1,0 +1,22 @@
+<div class="row mb-10">
+  <div class="col-xs-12">
+    <a href="/#/products"></a>
+  </div>
+</div>
+
+<div class="container">
+  <h2> Product Detail </h2>
+  <form (ngSubmit)="onSubmit()" class="form-horizontal" [ngFormModel]="form">
+    <div class="col-xs-12 text-right">
+      <span [hidden]="form.valid">
+        <label class="label label-danger mr-5">Invalid</label>
+      </span>
+      <button type="submit" class="btn btn-default" [disabled]="!form.valid">
+        Create
+      </button>
+    </div>
+
+    <post-form [post]="post" [form]="form"></post-form>
+
+  </form>
+</div>

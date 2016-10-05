@@ -15,11 +15,12 @@ module.exports = {
   },
   resolve: {
     root: [path.join(__dirname, 'client/assets/scripts')],
-    extensions: ['', '.webpack.js', '.web.js', '.ts', '.tsx', '.js']
+    extensions: ['', '.webpack.js', '.web.js', '.ts', '.tsx', '.js', '.html']
   },
   module: {
     loaders: [
-      { test: /\.ts?$/, exclude: /node_modules/, loader: 'ts-loader' }
+      { test: /\.ts?$/, exclude: /node_modules/, loader: 'ts-loader' },
+      { test: /\.html$/, loader: 'file-loader' }
     ]
   },
   plugins: [

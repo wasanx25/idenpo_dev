@@ -11,6 +11,7 @@
   "license": "ISC",
   "dependencies": {
     "angular2": "2.0.0-beta.1",
+    "systemjs": "0.19.6",
     "es6-promise": "^3.0.2",
     "es6-shim": "^0.33.3",
     "es7-reflect-metadata": "^1.4.0",
@@ -21,6 +22,7 @@
     "concurrently": "^1.0.0",
     "exports-loader": "^0.6.2",
     "expose-loader": "^0.7.1",
+    "file-loader": "^0.8.4",
     "imports-loader": "^0.6.5",
     "ts-loader": "^0.7.2",
     "typescript": "^1.7.3",

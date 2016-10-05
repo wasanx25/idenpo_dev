@@ -7,7 +7,9 @@ import {
   APP_BASE_HREF,
   ROUTER_PROVIDERS as NG2_ROUTER_PROVIDERS
 } from 'angular2/router';
+import {HTTP_PROVIDERS} from 'angular2/http';
  
+require('./development');
 const ROUTER_PROVIDERS: Array<any> = [
   NG2_ROUTER_PROVIDERS,
   provide(ROUTER_PRIMARY_COMPONENT, {
@@ -23,5 +25,5 @@ const APP_PROVIDERS: Array<any> = [
 ];
  
 window.addEventListener("load", (e) => {
-  bootstrap(App, APP_PROVIDERS);
+  bootstrap(App, [HTTP_PROVIDERS, ROUTER_PROVIDERS]);
 });
